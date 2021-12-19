@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.moviestar.R
 import com.example.moviestar.databinding.MainFragmentBinding
 import com.example.moviestar.model.Movie
 import com.example.moviestar.viewmodel.AppState
@@ -20,6 +21,8 @@ class MainFragment : Fragment() {
 
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
+    private val adapter_rus = MainAdapter()
+    private val adapter_world = MainAdapter()
 
     private lateinit var viewModel: MainViewModel
 
@@ -33,32 +36,60 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.mainRecyclerViewForRusMovie.adapter = adapter_rus
+        binding.mainRecyclerViewForWorldMovie.adapter = adapter_world
+
+        adapter_rus.listener = MainAdapter.OnItemClick { movie ->
+            val bundle = Bundle()
+            bundle.putParcelable("MOVIE_EXTRA", movie)
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.main_container, DetailFragment.newInstance(bundle)).commit()
+        }
+
+        adapter_world.listener = MainAdapter.OnItemClick { movie ->
+            val bundle = Bundle()
+            bundle.putParcelable("MOVIE_EXTRA", movie)
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.main_container, DetailFragment.newInstance(bundle)).commit()
+        }
+
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         viewModel.getData().observe(viewLifecycleOwner, {state
             -> render(state)
         })
 
-        viewModel.getMovie()
+
+        viewModel.getMovieFromLocalStorageRus()
+
+
     }
 
     private fun render(state: AppState) {
         when (state) {
-            is AppState.Success -> {
+            is AppState.Success<*> -> {
+                val movie: List<Movie> = state.data as List<Movie>
+                val isRussian = state.isRussian
+                if (isRussian) {
+                    adapter_rus.setMovie(movie)
+                    viewModel.getMovieFromLocalStorageWorld()
+                } else {
+                    adapter_world.setMovie(movie)
+                }
                 binding.loadingContainer.visibility = View.GONE
-                val movie = state.movie as Movie
-                binding.movieItem.originalTitle.text = movie.movieName
-                binding.movieItem.releaseYear.text = movie.releaseYear.toString()
-                binding.movieItem.voteAverage.text = movie.rating.toString()
+                binding.recyclerViewContainer.visibility = View.VISIBLE
             }
             is AppState.Error -> {
+                binding.recyclerViewContainer.visibility = View.GONE
                 binding.loadingContainer.visibility = View.VISIBLE
                 Snackbar.make(binding.root, state.error.message.toString(), Snackbar.LENGTH_INDEFINITE)
                     .setAction("Еще раз") {
-                        viewModel.getMovie()
+                        viewModel.getMovieFromLocalStorageRus()
+                      //  viewModel.getMovieFromLocalStorageWorld()
                     }.show()
             }
-            is  AppState.Loading -> {
+            is AppState.Loading -> {
+                binding.recyclerViewContainer.visibility = View.GONE
                 binding.loadingContainer.visibility = View.VISIBLE
             }
         }

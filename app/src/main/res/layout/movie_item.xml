@@ -1,42 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="200dp"
+    android:layout_height="100dp"
+    android:layout_margin="1dp"
+    android:padding="4dp"
+    android:background="@android:color/holo_blue_dark"
     xmlns:tools="http://schemas.android.com/tools"
-    android:paddingVertical="100dp"
-    android:paddingHorizontal="15dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
     <TextView
-        android:id="@+id/originalTitle"
+        android:id="@+id/original_title_recycle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
         android:layout_alignParentTop="true"
-        android:textSize="45sp"
+        android:gravity="center"
+        android:textSize="35sp"
         android:textStyle="bold"
-        tools:text="Fight Club"/>
+        android:singleLine="false"
+        tools:text="Fight Club" />
 
     <TextView
-        android:id="@+id/releaseYear"
-        android:layout_width="wrap_content"
+        android:id="@+id/release_year_recycle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:textSize="28sp"
-        android:textStyle="normal"
+        android:gravity="left"
+        android:textSize="18sp"
+        android:textStyle="bold"
         tools:text="1999"/>
 
     <TextView
-        android:id="@+id/voteAverage"
-        android:layout_width="wrap_content"
+        android:id="@+id/vote_average_recycle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:textSize="28sp"
-        android:textStyle="normal"
+        android:gravity="right"
+        android:textSize="18sp"
+        android:textStyle="bold"
         tools:text="8.4"/>
 
 </RelativeLayout>
