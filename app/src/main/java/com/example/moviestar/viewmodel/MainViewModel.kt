@@ -23,9 +23,9 @@ class MainViewModel : ViewModel() {
         liveDataToObserve.value = AppState.Loading
 
         Thread {
-            Thread.sleep(3000)
+            Thread.sleep(1000)
 
-            if(Random.nextBoolean()){
+            if(Random.nextBoolean() || Random.nextBoolean()){
                 val movie = if (isRussian) {
                     repository.getMovieFromLocalStorageRus()
                 } else {

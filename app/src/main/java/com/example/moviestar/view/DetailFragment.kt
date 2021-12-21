@@ -40,10 +40,11 @@ class DetailFragment : Fragment() {
 
         val movie = arguments?.getParcelable<Movie>("MOVIE_EXTRA")
 
-        binding.originalTitle.text = movie?.title ?: ""
-        binding.releaseYear.text = movie?.releaseYear?.toString() ?: ""
-        binding.voteAverage.text = movie?.voteAverage?.toString() ?: ""
-
+        movie?.let {
+            binding.originalTitle.text = movie.title
+            binding.releaseYear.text = movie.releaseYear.toString()
+            binding.voteAverage.text = movie.voteAverage.toString()
+        }
     }
 
     override fun onDestroy() {
