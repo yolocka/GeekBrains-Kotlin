@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isEmpty
 import com.example.moviestar.R
 import com.example.moviestar.databinding.MainFragmentBinding
 import com.example.moviestar.model.Movie
@@ -72,7 +74,10 @@ class MainFragment : Fragment() {
                 val isRussian = state.isRussian
                 if (isRussian) {
                     adapter_rus.setMovie(movie)
-                    viewModel.getMovieFromLocalStorageWorld()
+                    if (binding.mainRecyclerViewForWorldMovie.isEmpty()) {
+                        viewModel.getMovieFromLocalStorageWorld()
+
+                    }
                 } else {
                     adapter_world.setMovie(movie)
                 }
@@ -82,11 +87,9 @@ class MainFragment : Fragment() {
             is AppState.Error -> {
                 binding.recyclerViewContainer.visibility = View.GONE
                 binding.loadingContainer.visibility = View.VISIBLE
-                Snackbar.make(binding.root, state.error.message.toString(), Snackbar.LENGTH_INDEFINITE)
-                    .setAction("Еще раз") {
-                        viewModel.getMovieFromLocalStorageRus()
-                      //  viewModel.getMovieFromLocalStorageWorld()
-                    }.show()
+                binding.mainFragment.showSnackBar(state.error.message.toString(), 
+                    Snackbar.LENGTH_INDEFINITE,
+                    "Еще раз") { viewModel.getMovieFromLocalStorageRus() }
             }
             is AppState.Loading -> {
                 binding.recyclerViewContainer.visibility = View.GONE
