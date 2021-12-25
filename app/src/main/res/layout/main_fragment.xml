@@ -3,23 +3,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.MainFragment">
 
-    <include
-        layout = "@layout/movie_item"
-        android:id="@+id/movieItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="2sp"
-        android:layout_marginRight="2sp"
-        />
+    <LinearLayout
+        android:id="@+id/recycler_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/main_recycler_view_for_rus_movie"
+            tools:listitem="@layout/movie_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/main_recycler_view_for_world_movie"
+            tools:listitem="@layout/movie_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/loadingContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:visibility="gone">
 
 
         <TextView
@@ -34,10 +53,9 @@
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-
-
     </LinearLayout>
 
-
-
 </FrameLayout>
+
+
+

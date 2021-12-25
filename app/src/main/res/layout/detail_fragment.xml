@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.MainFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="1dp"
+        android:paddingVertical="200dp"
+        android:paddingHorizontal="20dp">
+
+
+        <TextView
+            android:id="@+id/originalTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            tools:text="Fight Club" />
+
+        <TextView
+            android:id="@+id/releaseYear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="left"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="1999"/>
+
+        <TextView
+            android:id="@+id/voteAverage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="right"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="8.4"/>
+
+    </RelativeLayout>
+
+</FrameLayout>
