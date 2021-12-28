@@ -4,7 +4,6 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingVertical="50dp"
     tools:context=".view.MainFragment">
 
     <ImageView
@@ -17,7 +16,7 @@
         android:layout_height="match_parent"
         android:layout_margin="1dp"
         android:paddingVertical="5dp"
-        android:paddingHorizontal="20dp">
+        android:paddingHorizontal="10dp">
 
 
         <TextView
@@ -41,38 +40,42 @@
             tools:text="@string/def_year"/>
 
         <TextView
-            android:id="@+id/genres"
-            android:layout_width="match_parent"
+            android:id="@+id/voteAverage"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/originalTitle"
-            android:layout_toEndOf="@id/releaseDate"
-            android:gravity="left"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            tools:text="@string/def_year"/>
-
-        <TextView
-            android:id="@+id/voteAverage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/releaseDate"
-            android:gravity="left"
+            android:layout_toEndOf="@+id/releaseDate"
+            android:layout_alignParentEnd="true"
+            android:gravity="right"
             android:textSize="18sp"
             android:textStyle="bold"
             tools:text="@string/def_vote"/>
+
         <TextView
             android:id="@+id/tagline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/voteAverage"
             android:gravity="left"
+            android:textColor="@color/cardview_dark_background"
+            android:textStyle="italic"
             android:textSize="18sp"
-            tools:text="@string/def_vote"/>
+            tools:text="@string/def_vote" />
+
+        <TextView
+            android:id="@+id/empty_v"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tagline"
+            android:gravity="fill_horizontal"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="@string/empty"/>
         <TextView
             android:id="@+id/overV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tagline"
+            android:layout_below="@id/empty_v"
             android:gravity="left"
             android:textSize="12sp"
             android:textStyle="bold"
@@ -86,9 +89,8 @@
                 android:id="@+id/overview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
-                android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:gravity="fill_horizontal"
+                android:textSize="18sp" />
         </ScrollView>
 
     </RelativeLayout>

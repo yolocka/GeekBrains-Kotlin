@@ -17,13 +17,9 @@ object MovieLoader {
 
     fun load (movie: Movie, listener: OnMovieLoadedListener) {
 
-        val handler = Handler(Looper.getMainLooper())
-
-        Thread {
             var urlConnection: HttpURLConnection? = null
 
             try {
-
                 val uri = URL("https://api.themoviedb.org/3/movie/${movie.id}?api_key=${MY_APY_KEY}")
                 urlConnection = uri.openConnection() as HttpURLConnection
                 urlConnection.requestMethod = "GET"
@@ -39,17 +35,12 @@ object MovieLoader {
                 }
 
                 val movieDTO = Gson().fromJson(result, MovieDTO::class.java)
-                handler.post {
-                    listener.onLoaded(movieDTO = movieDTO)
-                }
+                listener.onLoaded(movieDTO = movieDTO)
             } catch (e: Exception) {
-                handler.post {
-                    listener.onFailed(e)
-                }
+                listener.onFailed(e)
             } finally {
                 urlConnection?.disconnect()
             }
-        }.start()
     }
 
     interface OnMovieLoadedListener{

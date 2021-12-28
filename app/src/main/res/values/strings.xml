@@ -6,4 +6,8 @@
     <string name="loading">LOADING</string>
     <string name="one_more_time">Еще раз</string>
     <string name="overview">OVERVIEW</string>
+    <string name="extra">MOVIE_EXTRA</string>
+    <string name="fail">ОШИБКА</string>
+    <string name="empty"> </string>
+    <string name="con_changed">Подключение к интернету измененилось</string>
 </resources>
