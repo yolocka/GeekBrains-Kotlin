@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import coil.load
 import com.example.moviestar.R
 import com.example.moviestar.databinding.DetailFragmentBinding
 import com.example.moviestar.model.*
@@ -25,16 +26,15 @@ class DetailFragment : Fragment() {
     private val listener = Repository.OnLoadListener {
         RepositoryImpl.getMovieFromServer()?.let { movie ->
             binding.originalTitle.text = movie.title
-            binding.releaseDate.text = movie.releaseYear.toString()
+            binding.releaseDate.text = movie.releaseYear
             binding.voteAverage.text = movie.voteAverage.toString()
             binding.overview.text = movie.overview
             binding.tagline.text = movie.tagline
+            binding.movieImage.load("https://www.themoviedb.org/t/p/original${movie.movieImage}")
         } ?: Toast.makeText(context, R.string.fail, Toast.LENGTH_LONG).show()
     }
     private var _binding: DetailFragmentBinding? = null
     private val binding get() = _binding!!
-
-    private lateinit var viewModel: DetailViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

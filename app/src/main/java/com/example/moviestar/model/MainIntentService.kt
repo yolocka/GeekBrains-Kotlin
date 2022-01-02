@@ -10,7 +10,7 @@ class MainIntentService : IntentService("MainIntentService") {
     }
     override fun onHandleIntent(intent: Intent?) {
         intent?.getParcelableExtra<Movie>("MOVIE_EXTRA")?.let { movie ->
-            MovieLoader.load(movie, object: MovieLoader.OnMovieLoadedListener {
+            MovieLoader.loadRetrofit(movie, object: MovieLoader.OnMovieLoadedListener {
                 override fun onLoaded(movieDTO: MovieDTO) {
                     applicationContext.sendBroadcast(Intent(applicationContext, MainReceiver::class.java).apply {
                         action = MainReceiver.MOVIE_LOAD_SUCCESS
@@ -20,7 +20,8 @@ class MainIntentService : IntentService("MainIntentService") {
                             releaseYear = movieDTO.releaseDate.toString().takeLast(4) ?: "",
                             voteAverage = movieDTO.voteAverage ?: 0.0,
                             tagline = movieDTO.tagline ?: "",
-                            overview = movieDTO.overview ?: ""
+                            overview = movieDTO.overview ?: "",
+                            movieImage = movieDTO.posterPath ?: ""
                         ))
                     })
                 }
