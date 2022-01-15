@@ -2,18 +2,27 @@ package com.example.moviestar.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.example.moviestar.R
 import com.example.moviestar.databinding.DetailFragmentBinding
 import com.example.moviestar.model.*
 import com.example.moviestar.viewmodel.DetailViewModel
+import java.util.*
 
 class DetailFragment : Fragment() {
+
+    private var movie: Movie? = null
+
+    private val viewModel: DetailViewModel by lazy {
+        ViewModelProvider(this).get(DetailViewModel::class.java)
+    }
 
     companion object {
         fun newInstance(bundle: Bundle?) : DetailFragment {
@@ -31,6 +40,11 @@ class DetailFragment : Fragment() {
             binding.overview.text = movie.overview
             binding.tagline.text = movie.tagline
             binding.movieImage.load("https://www.themoviedb.org/t/p/original${movie.movieImage}")
+
+            this.movie = movie
+            viewModel.saveHistory(movie)
+            viewModel.updateTimestamp(Date().time, movie.id)
+            binding.myNote.text = (viewModel.getOneMovieHistory(movie.id).note ?: 0) as CharSequence?
         } ?: Toast.makeText(context, R.string.fail, Toast.LENGTH_LONG).show()
     }
     private var _binding: DetailFragmentBinding? = null
@@ -56,6 +70,23 @@ class DetailFragment : Fragment() {
             })
 
         }
+
+        binding.noteEditText.setOnKeyListener(object : View.OnKeyListener {
+            override fun onKey(p0: View?, p1: Int, p2: KeyEvent?): Boolean {
+                if (p2?.action == KeyEvent.ACTION_DOWN && p1 == KeyEvent.KEYCODE_ENTER) {
+                    binding.myNote.text = binding.noteEditText.editableText
+                    viewModel.updateNote(movie?.id ?: 0, binding.noteEditText.editableText.toString())
+                    with(binding.noteEditText) {
+                        clearFocus()
+                        isCursorVisible = false
+                        text.clear()
+                    }
+                    return true
+                }
+                return false
+            }
+
+        })
     }
 
     override fun onDestroy() {

@@ -17,5 +17,9 @@ data class MovieDTO (
     @SerializedName("overview")
     val overview: String,
     @SerializedName("poster_path")
-    val posterPath: String
+    val posterPath: String,
+    @SerializedName("adult")
+    val adult: Boolean,
+    @SerializedName("runtime")
+    val runtime: Int
 )

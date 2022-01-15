@@ -1,5 +1,6 @@
 package com.example.moviestar.view
 
+import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import androidx.core.view.isEmpty
 import com.example.moviestar.R
 import com.example.moviestar.databinding.MainFragmentBinding
+import com.example.moviestar.model.LocalRepositoryImpl
 import com.example.moviestar.model.Movie
 import com.example.moviestar.viewmodel.AppState
 import com.example.moviestar.viewmodel.MainViewModel
@@ -18,12 +20,14 @@ class MainFragment : Fragment() {
 
     companion object {
         fun newInstance() = MainFragment()
+        private const val PREF_NAME = "is_adult"
     }
 
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
-    private val adapter_rus = MainAdapter()
-    private val adapter_world = MainAdapter()
+    private val adapterRus = MainAdapter()
+    private val adapterWorld = MainAdapter()
+    private val adapterHistory = MainAdapter()
 
     private lateinit var viewModel: MainViewModel
 
@@ -37,12 +41,15 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+        val editor = sharedPref?.edit()
         with(binding) {
-            mainRecyclerViewForRusMovie.adapter = adapter_rus
-            mainRecyclerViewForWorldMovie.adapter = adapter_world
+            mainRecyclerViewForRusMovie.adapter = adapterRus
+            mainRecyclerViewForWorldMovie.adapter = adapterWorld
+            mainRecyclerViewForHistoryListMovie.adapter = adapterHistory
         }
 
-        adapter_rus.listener = MainAdapter.OnItemClick { movie ->
+        adapterRus.listener = MainAdapter.OnItemClick { movie ->
             val bundle = Bundle().apply {
                 putParcelable("MOVIE_EXTRA", movie)
             }
@@ -54,7 +61,19 @@ class MainFragment : Fragment() {
             }
         }
 
-        adapter_world.listener = MainAdapter.OnItemClick { movie ->
+        adapterWorld.listener = MainAdapter.OnItemClick { movie ->
+            val bundle = Bundle().apply {
+                putParcelable("MOVIE_EXTRA", movie)
+            }
+            activity?.supportFragmentManager?.apply {
+                beginTransaction()
+                    .replace(R.id.main_container, DetailFragment.newInstance(bundle))
+                    .addToBackStack("main")
+                    .commit()
+            }
+        }
+
+        adapterHistory.listener = MainAdapter.OnItemClick { movie ->
             val bundle = Bundle().apply {
                 putParcelable("MOVIE_EXTRA", movie)
             }
@@ -74,6 +93,27 @@ class MainFragment : Fragment() {
 
 
         viewModel.getMovieFromLocalStorageRus()
+
+        if (sharedPref?.getBoolean(PREF_NAME, false) == true) {
+            binding.adultFAB.setImageResource(R.drawable.adults_only_icon)
+        } else {
+            binding.adultFAB.setImageResource(R.drawable.not_adults_only_icon)
+        }
+
+        binding.adultFAB.setOnClickListener{
+            var isAdult: Boolean? = sharedPref?.getBoolean(PREF_NAME, false)
+            isAdult = !isAdult!!
+            editor?.let {
+                editor.putBoolean(PREF_NAME, isAdult ?: false)
+                editor.apply()
+            }
+            if(isAdult == true) {
+                binding.adultFAB.setImageResource(R.drawable.adults_only_icon)
+            } else {
+                binding.adultFAB.setImageResource(R.drawable.not_adults_only_icon)
+            }
+        }
+        adapterHistory.setMovie(viewModel.getAllHistory())
     }
 
     private fun render(state: AppState) {
@@ -82,13 +122,13 @@ class MainFragment : Fragment() {
                 val movie: List<Movie> = state.data as List<Movie>
                 val isRussian = state.isRussian
                 if (isRussian) {
-                    adapter_rus.setMovie(movie)
+                    adapterRus.setMovie(movie)
                     if (binding.mainRecyclerViewForWorldMovie.isEmpty()) {
                         viewModel.getMovieFromLocalStorageWorld()
 
                     }
                 } else {
-                    adapter_world.setMovie(movie)
+                    adapterWorld.setMovie(movie)
                 }
                 binding.loadingContainer.visibility = View.GONE
                 binding.recyclerViewContainer.visibility = View.VISIBLE

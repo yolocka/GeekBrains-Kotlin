@@ -64,19 +64,26 @@
             tools:text="@string/def_vote" />
 
         <TextView
-            android:id="@+id/empty_v"
+            android:id="@+id/my_note"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tagline"
             android:gravity="fill_horizontal"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:text="@string/empty"/>
+            android:textSize="18sp"/>
+
+        <EditText
+            android:id="@+id/noteEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/my_note"
+            android:inputType="textMultiLine"
+            android:hint="@string/note_text"
+            />
         <TextView
             android:id="@+id/overV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/empty_v"
+            android:layout_below="@id/noteEditText"
             android:gravity="left"
             android:textSize="12sp"
             android:textStyle="bold"

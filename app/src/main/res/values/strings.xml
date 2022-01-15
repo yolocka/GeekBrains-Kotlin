@@ -11,5 +11,7 @@
     <string name="empty"> </string>
     <string name="russian_movies">Российские фильмы</string>
     <string name="foreign_movies">Зарубежные фильмы</string>
+    <string name="history_list_of_movies">Недавно просмотренные фильмы</string>
     <string name="con_changed">Подключение к интернету измененилось</string>
+    <string name="note_text">Моя заметка</string>
 </resources>

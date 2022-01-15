@@ -21,7 +21,9 @@ class MainIntentService : IntentService("MainIntentService") {
                             voteAverage = movieDTO.voteAverage ?: 0.0,
                             tagline = movieDTO.tagline ?: "",
                             overview = movieDTO.overview ?: "",
-                            movieImage = movieDTO.posterPath ?: ""
+                            movieImage = movieDTO.posterPath ?: "",
+                            adult = movieDTO.adult ?: false,
+                            runtime = movieDTO.runtime ?: 0
                         ))
                     })
                 }
