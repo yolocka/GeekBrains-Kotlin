@@ -18,6 +18,9 @@ interface HistoryDAO {
     @Query ("UPDATE HistoryEntity SET note=:note WHERE movieId=:id")
     suspend fun updateNote(id: Int, note: String)
 
+    @Query ("UPDATE HistoryEntity SET isFavourite=:isFavourite WHERE movieId=:id")
+    suspend fun updateFavourite(id: Int, isFavourite: Boolean)
+
     @Query ("UPDATE HistoryEntity SET timestamp=:timestamp WHERE movieId=:id")
     suspend fun updateTimestamp(timestamp: Long, id: Int)
 

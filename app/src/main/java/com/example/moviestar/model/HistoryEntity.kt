@@ -13,5 +13,6 @@ data class HistoryEntity (
     val releaseYear: String,
     val note: String,
     val runtime: Int,
-    val timestamp: Long
+    val timestamp: Long,
+    val isFavourite: Boolean
     )

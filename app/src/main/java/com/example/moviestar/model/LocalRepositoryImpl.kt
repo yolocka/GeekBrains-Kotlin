@@ -20,17 +20,19 @@ class LocalRepositoryImpl(private val dao: HistoryDAO): LocalRepository {
                         title = entity.title,
                         releaseYear = entity.releaseYear,
                         note = entity.note,
-                        runtime = entity.runtime
+                        runtime = entity.runtime,
+                        isFavourite = entity.isFavourite
                     ) }
     }
 
-    override fun getOneMovieNote(id: Int): Movie = runBlocking {
+    override fun getOneMovieHistory(id: Int): Movie = runBlocking {
         Movie(
             id = dao.getOneMovieHistoryData(id).movieId,
             title = dao.getOneMovieHistoryData(id).title,
             releaseYear = dao.getOneMovieHistoryData(id).releaseYear,
             note = dao.getOneMovieHistoryData(id).note,
-            runtime = dao.getOneMovieHistoryData(id).runtime
+            runtime = dao.getOneMovieHistoryData(id).runtime,
+            isFavourite = dao.getOneMovieHistoryData(id).isFavourite
         )
     }
 
@@ -43,7 +45,8 @@ class LocalRepositoryImpl(private val dao: HistoryDAO): LocalRepository {
                 releaseYear = movie.releaseYear,
                 note = movie.note,
                 runtime = movie.runtime,
-                timestamp = Date().time
+                timestamp = Date().time,
+                isFavourite = movie.isFavourite
             )
         )
     }
@@ -54,5 +57,9 @@ class LocalRepositoryImpl(private val dao: HistoryDAO): LocalRepository {
 
     override fun updateTimestamp(timestamp: Long, id: Int) =  runBlocking{
         dao.updateTimestamp(timestamp, id)
+    }
+
+    override fun updateFavourite(id: Int, isFavourite: Boolean) = runBlocking {
+        dao.updateFavourite(id, isFavourite)
     }
 }

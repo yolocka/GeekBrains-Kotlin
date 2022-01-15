@@ -8,12 +8,14 @@ interface LocalRepository {
 
     fun getAllHistory(): List<Movie>
 
-    fun getOneMovieNote(id: Int): Movie
+    fun getOneMovieHistory(id: Int): Movie
 
     fun saveEntity(movie: Movie)
 
     fun updateNote(id: Int, note: String)
 
     fun updateTimestamp(timestamp: Long, id: Int)
+
+    fun updateFavourite(id: Int, isFavourite: Boolean)
 
 }

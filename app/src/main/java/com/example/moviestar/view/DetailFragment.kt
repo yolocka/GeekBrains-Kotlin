@@ -19,6 +19,7 @@ import java.util.*
 class DetailFragment : Fragment() {
 
     private var movie: Movie? = null
+    private var isFavourite: Boolean? = false
 
     private val viewModel: DetailViewModel by lazy {
         ViewModelProvider(this).get(DetailViewModel::class.java)
@@ -45,6 +46,7 @@ class DetailFragment : Fragment() {
             viewModel.saveHistory(movie)
             viewModel.updateTimestamp(Date().time, movie.id)
             binding.myNote.text = (viewModel.getOneMovieHistory(movie.id).note ?: 0) as CharSequence?
+            if (viewModel.getOneMovieHistory(movie.id).isFavourite) binding.favouriteFab.setImageResource(R.drawable.favourite_icon)
         } ?: Toast.makeText(context, R.string.fail, Toast.LENGTH_LONG).show()
     }
     private var _binding: DetailFragmentBinding? = null
@@ -87,6 +89,16 @@ class DetailFragment : Fragment() {
             }
 
         })
+
+        binding.favouriteFab.setOnClickListener{
+            isFavourite = !viewModel.getOneMovieHistory(movie?.id ?: 0).isFavourite
+            viewModel.updateFavourite(movie?.id ?: 0, isFavourite ?: false)
+            if(isFavourite == true) {
+                binding.favouriteFab.setImageResource(R.drawable.favourite_icon)
+            } else {
+                binding.favouriteFab.setImageResource(R.drawable.not_favourite_icon)
+            }
+        }
     }
 
     override fun onDestroy() {

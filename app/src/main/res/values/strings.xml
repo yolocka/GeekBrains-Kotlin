@@ -14,4 +14,7 @@
     <string name="history_list_of_movies">Недавно просмотренные фильмы</string>
     <string name="con_changed">Подключение к интернету измененилось</string>
     <string name="note_text">Моя заметка</string>
+    <string name="favourites_movie">Любимые фильмы</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -18,12 +18,16 @@ class DetailViewModel : ViewModel() {
         localRepo.updateNote(id, note)
     }
 
+    fun updateFavourite(id: Int, isFavourite: Boolean) {
+        localRepo.updateFavourite(id, isFavourite)
+    }
+
     fun updateTimestamp(timestamp: Long, id: Int) {
         localRepo.updateTimestamp(timestamp, id)
     }
 
     fun getOneMovieHistory(id: Int) : Movie{
-        return localRepo.getOneMovieNote(id)
+        return localRepo.getOneMovieHistory(id)
     }
 
 }

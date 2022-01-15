@@ -70,7 +70,18 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="15dp"
         android:src="@drawable/adults_only_icon"
-        app:maxImageSize="60dp"/>
+        app:maxImageSize="50dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/favourite_movies_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/favourites_movie"
+        android:backgroundTint="@color/cardview_shadow_end_color"
+        android:layout_margin="15dp"
+        android:textSize="20dp"
+        android:layout_gravity="bottom|start"
+        />
 
     <LinearLayout
         android:id="@+id/loadingContainer"

@@ -114,6 +114,14 @@ class MainFragment : Fragment() {
             }
         }
         adapterHistory.setMovie(viewModel.getAllHistory())
+        binding.favouriteMoviesButton.setOnClickListener{
+            activity?.supportFragmentManager?.apply {
+                beginTransaction()
+                    .replace(R.id.main_container, FavouriteMovieFragment.newInstance())
+                    .addToBackStack("fav")
+                    .commit()
+            }
+        }
     }
 
     private fun render(state: AppState) {
