@@ -9,5 +9,7 @@
     <string name="extra">MOVIE_EXTRA</string>
     <string name="fail">ОШИБКА</string>
     <string name="empty"> </string>
+    <string name="russian_movies">Российские фильмы</string>
+    <string name="foreign_movies">Зарубежные фильмы</string>
     <string name="con_changed">Подключение к интернету измененилось</string>
 </resources>

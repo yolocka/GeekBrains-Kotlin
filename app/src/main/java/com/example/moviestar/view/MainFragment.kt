@@ -43,17 +43,27 @@ class MainFragment : Fragment() {
         }
 
         adapter_rus.listener = MainAdapter.OnItemClick { movie ->
-            val bundle = Bundle()
-            bundle.putParcelable("MOVIE_EXTRA", movie)
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.main_container, DetailFragment.newInstance(bundle)).commit()
+            val bundle = Bundle().apply {
+                putParcelable("MOVIE_EXTRA", movie)
+            }
+            activity?.supportFragmentManager?.apply {
+                beginTransaction()
+                    .replace(R.id.main_container, DetailFragment.newInstance(bundle))
+                    .addToBackStack("main")
+                    .commit()
+            }
         }
 
         adapter_world.listener = MainAdapter.OnItemClick { movie ->
-            val bundle = Bundle()
-            bundle.putParcelable("MOVIE_EXTRA", movie)
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.main_container, DetailFragment.newInstance(bundle)).commit()
+            val bundle = Bundle().apply {
+                putParcelable("MOVIE_EXTRA", movie)
+            }
+            activity?.supportFragmentManager?.apply {
+                beginTransaction()
+                    .replace(R.id.main_container, DetailFragment.newInstance(bundle))
+                    .addToBackStack("main")
+                    .commit()
+            }
         }
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)

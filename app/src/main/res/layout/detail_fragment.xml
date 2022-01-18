@@ -7,6 +7,7 @@
     tools:context=".view.MainFragment">
 
     <ImageView
+        android:id="@+id/movie_image"
         android:layout_width="120dp"
         android:layout_height="500dp"/>
 
