@@ -7,10 +7,4 @@
     android:id="@+id/main_container"
     tools:context=".view.MainActivity">
 
-    <fragment
-        android:id="@+id/main_fragment"
-        android:name="com.example.moviestar.view.MainFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

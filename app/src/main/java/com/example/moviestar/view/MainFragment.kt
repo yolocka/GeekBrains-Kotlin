@@ -38,8 +38,10 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.mainRecyclerViewForRusMovie.adapter = adapter_rus
-        binding.mainRecyclerViewForWorldMovie.adapter = adapter_world
+        with(binding) {
+            mainRecyclerViewForRusMovie.adapter = adapter_rus
+            mainRecyclerViewForWorldMovie.adapter = adapter_world
+        }
 
         adapter_rus.listener = MainAdapter.OnItemClick { movie ->
             val bundle = Bundle()
@@ -63,8 +65,6 @@ class MainFragment : Fragment() {
 
 
         viewModel.getMovieFromLocalStorageRus()
-
-
     }
 
     private fun render(state: AppState) {
@@ -89,7 +89,7 @@ class MainFragment : Fragment() {
                 binding.loadingContainer.visibility = View.VISIBLE
                 binding.mainFragment.showSnackBar(state.error.message.toString(), 
                     Snackbar.LENGTH_INDEFINITE,
-                    "Еще раз") { viewModel.getMovieFromLocalStorageRus() }
+                    R.string.one_more_time) { viewModel.getMovieFromLocalStorageRus() }
             }
             is AppState.Loading -> {
                 binding.recyclerViewContainer.visibility = View.GONE

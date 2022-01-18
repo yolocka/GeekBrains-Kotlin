@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingVertical="50dp"
     tools:context=".view.MainFragment">
+
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="500dp"/>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_margin="1dp"
-        android:paddingVertical="200dp"
+        android:paddingVertical="5dp"
         android:paddingHorizontal="20dp">
 
 
@@ -18,31 +25,72 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:gravity="center"
+            android:gravity="right"
             android:textSize="35sp"
             android:textStyle="bold"
-            tools:text="Fight Club" />
+            tools:text="@string/def_title" />
 
         <TextView
-            android:id="@+id/releaseYear"
-            android:layout_width="match_parent"
+            android:id="@+id/releaseDate"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_below="@id/originalTitle"
             android:gravity="left"
             android:textSize="18sp"
             android:textStyle="bold"
-            tools:text="1999"/>
+            tools:text="@string/def_year"/>
+
+        <TextView
+            android:id="@+id/genres"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/originalTitle"
+            android:layout_toEndOf="@id/releaseDate"
+            android:gravity="left"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="@string/def_year"/>
 
         <TextView
             android:id="@+id/voteAverage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:gravity="right"
+            android:layout_below="@id/releaseDate"
+            android:gravity="left"
             android:textSize="18sp"
             android:textStyle="bold"
-            tools:text="8.4"/>
+            tools:text="@string/def_vote"/>
+        <TextView
+            android:id="@+id/tagline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/voteAverage"
+            android:gravity="left"
+            android:textSize="18sp"
+            tools:text="@string/def_vote"/>
+        <TextView
+            android:id="@+id/overV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tagline"
+            android:gravity="left"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:text="@string/overview"/>
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/overV"
+            android:scrollbars="vertical">
+            <TextView
+                android:id="@+id/overview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+        </ScrollView>
 
     </RelativeLayout>
 
-</FrameLayout>
+</LinearLayout>

@@ -7,6 +7,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviestar.R
 import com.example.moviestar.model.Movie
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.DiffUtil.DiffResult
+
 
 class MainAdapter: RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
@@ -14,8 +17,11 @@ class MainAdapter: RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
     var listener: OnItemClick? = null
 
     fun setMovie(data: List<Movie>) {
+        val mainDiffUtilCallback = MainDiffUtilCallback(movie, data)
+        val productDiffResult = DiffUtil.calculateDiff(mainDiffUtilCallback)
         movie = data
-        notifyDataSetChanged()
+        //notifyDataSetChanged()
+        productDiffResult.dispatchUpdatesTo(this);
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
@@ -44,4 +50,5 @@ class MainAdapter: RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
     fun interface OnItemClick {
         fun onClick(movie: Movie)
     }
+
 }

@@ -19,7 +19,7 @@
         android:textSize="22sp"
         android:textStyle="bold"
         android:singleLine="false"
-        tools:text="Fight Club" />
+        tools:text="@string/def_title" />
 
     <TextView
         android:id="@+id/release_year_recycle"
@@ -29,7 +29,7 @@
         android:gravity="left"
         android:textSize="18sp"
         android:textStyle="bold"
-        tools:text="1999"/>
+        tools:text="@string/def_year"/>
 
     <TextView
         android:id="@+id/vote_average_recycle"
@@ -39,6 +39,6 @@
         android:gravity="right"
         android:textSize="18sp"
         android:textStyle="bold"
-        tools:text="8.4"/>
+        tools:text="@string/def_vote"/>
 
 </RelativeLayout>

@@ -9,6 +9,6 @@ fun View.showSnackBar(message: String, length: Int, text: CharSequence, listener
     Snackbar.make(this, message, length).setAction(text, listener).show()
 }
 
-fun View.showSnackBar(@StringRes message: Int, length: Int, @StringRes text: Int, listener: View.OnClickListener) {
+fun View.showSnackBar(message: String, length: Int, @StringRes text: Int, listener: View.OnClickListener) {
     Snackbar.make(this, message, length).setAction(text, listener).show()
 }

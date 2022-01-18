@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Movie Star</string>
+    <string name="def_title">Fight Club</string>
+    <string name="def_year">1999</string>
+    <string name="def_vote">8.4</string>
+    <string name="loading">LOADING</string>
+    <string name="one_more_time">Еще раз</string>
+    <string name="overview">OVERVIEW</string>
 </resources>
