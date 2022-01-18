@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.moviestar.R
 import com.example.moviestar.model.Movie
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.DiffUtil.DiffResult
 
 
 class MainAdapter: RecyclerView.Adapter<MainAdapter.MainViewHolder>() {

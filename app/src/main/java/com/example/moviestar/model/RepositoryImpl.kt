@@ -1,9 +1,11 @@
 package com.example.moviestar.model
 
-class RepositoryImpl : Repository {
-    override fun getMovieFromServer(): Movie {
-        return Movie(0,"Fight Club", 1999, 8.4, listOf("Drama") , "Mischief. Mayhem. Soap.", "A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy. Their concept catches on, with underground \\\"fight clubs\\\" forming in every town, until an eccentric gets in the way and ignites an out-of-control spiral toward oblivion.")
-    }
+object RepositoryImpl : Repository {
+
+    private val listeners: MutableList<Repository.OnLoadListener> = mutableListOf()
+    private var movie: Movie? = null
+
+    override fun getMovieFromServer(): Movie? = movie
 
     override fun getMovieFromLocalStorageRus(): List<Movie> {
         return getRussianMovies()
@@ -11,5 +13,19 @@ class RepositoryImpl : Repository {
 
     override fun getMovieFromLocalStorageWorld(): List<Movie> {
         return getWorldMovies()
+    }
+
+    override fun movieLoaded(movie: Movie?) {
+        this.movie = movie
+
+        listeners.forEach{it.onLoaded()}
+    }
+
+    override fun addLoaderListener(listener: Repository.OnLoadListener) {
+        listeners.add(listener)
+    }
+
+    override fun removeLoadListener(listener: Repository.OnLoadListener) {
+        listeners.remove(listener)
     }
 }

@@ -11,6 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieStar">
+        <service
+            android:name=".model.MainIntentService"
+            android:exported="false"/>
+
+        <receiver
+            android:name=".model.MainReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
+
         <activity
             android:name=".view.MainActivity"
             android:exported="true">

@@ -1,19 +1,16 @@
 package com.example.moviestar.view
 
-import androidx.lifecycle.ViewModelProvider
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.example.moviestar.R
 import com.example.moviestar.databinding.DetailFragmentBinding
-import com.example.moviestar.model.Movie
-import com.example.moviestar.model.MovieDTO
-import com.example.moviestar.model.MovieLoader
-import com.example.moviestar.viewmodel.AppState
+import com.example.moviestar.model.*
 import com.example.moviestar.viewmodel.DetailViewModel
-import com.google.android.material.snackbar.Snackbar
 
 class DetailFragment : Fragment() {
 
@@ -25,6 +22,15 @@ class DetailFragment : Fragment() {
         }
     }
 
+    private val listener = Repository.OnLoadListener {
+        RepositoryImpl.getMovieFromServer()?.let { movie ->
+            binding.originalTitle.text = movie.title
+            binding.releaseDate.text = movie.releaseYear.toString()
+            binding.voteAverage.text = movie.voteAverage.toString()
+            binding.overview.text = movie.overview
+            binding.tagline.text = movie.tagline
+        } ?: Toast.makeText(context, R.string.fail, Toast.LENGTH_LONG).show()
+    }
     private var _binding: DetailFragmentBinding? = null
     private val binding get() = _binding!!
 
@@ -41,28 +47,20 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        RepositoryImpl.addLoaderListener(listener)
+
         arguments?.getParcelable<Movie>("MOVIE_EXTRA")?.let { movie ->
-            MovieLoader.load(movie, object : MovieLoader.OnMovieLoadedListener {
-                override fun onLoaded(movieDTO: MovieDTO) {
-                    movieDTO?.let {
-                        binding.originalTitle.text = it.title
-                        binding.releaseDate.text = it.releaseDate.toString().takeLast(4)
-                        binding.voteAverage.text = it.voteAverage.toString()
-                        binding.overview.text = it.overview
-                        binding.tagline.text = it.tagline
-                    }
-                }
 
-                override fun onFailed(throwable: Throwable) {
-                    Toast.makeText(requireContext(), throwable.message, Toast.LENGTH_LONG).show()
-                }
-
+            requireActivity().startService(Intent(requireContext(), MainIntentService::class.java).apply {
+                putExtra("MOVIE_EXTRA", movie)
             })
+
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
+        RepositoryImpl.removeLoadListener(listener)
         _binding = null
     }
 }
