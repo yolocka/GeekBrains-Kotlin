@@ -1,12 +1,5 @@
 package com.example.moviestar.model
 
-import android.annotation.SuppressLint
-import androidx.lifecycle.Transformations.map
-import com.example.moviestar.databinding.DetailFragmentBinding
-import com.example.moviestar.view.DetailFragment
-import com.example.moviestar.view.MainAdapter
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.runBlocking
 import java.util.*
 

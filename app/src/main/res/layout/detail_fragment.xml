@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:gravity="right"
-            android:textSize="35sp"
+            android:textSize="@dimen/titleTextSize"
             android:textStyle="bold"
             tools:text="@string/def_title" />
 
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/originalTitle"
             android:gravity="left"
-            android:textSize="18sp"
+            android:textSize="@dimen/textSize"
             android:textStyle="bold"
             tools:text="@string/def_year"/>
 
@@ -46,12 +46,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/originalTitle"
-            android:layout_toEndOf="@+id/releaseDate"
             android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/releaseDate"
             android:gravity="right"
-            android:textSize="18sp"
+            android:textSize="@dimen/textSize"
             android:textStyle="bold"
-            tools:text="@string/def_vote"/>
+            tools:text="@string/def_vote" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/favourite_fab"
@@ -73,7 +73,7 @@
             android:layout_below="@id/voteAverage"
             android:gravity="left"
             android:textColor="@color/cardview_dark_background"
-            android:textSize="18sp"
+            android:textSize="@dimen/textSize"
             android:textStyle="italic"
             tools:text="@string/def_vote" />
 
@@ -83,7 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tagline"
             android:gravity="fill_horizontal"
-            android:textSize="18sp"/>
+            android:textSize="@dimen/textSize"/>
 
         <EditText
             android:id="@+id/noteEditText"
@@ -99,7 +99,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/noteEditText"
             android:gravity="left"
-            android:textSize="12sp"
+            android:textSize="@dimen/smallTextSize"
             android:textStyle="bold"
             android:text="@string/overview"/>
         <ScrollView
@@ -112,7 +112,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="fill_horizontal"
-                android:textSize="18sp" />
+                android:textSize="@dimen/textSize" />
         </ScrollView>
 
     </RelativeLayout>

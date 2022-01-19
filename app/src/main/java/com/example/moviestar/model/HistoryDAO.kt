@@ -1,7 +1,6 @@
 package com.example.moviestar.model
 
 import androidx.room.*
-import io.reactivex.Flowable
 
 @Dao
 interface HistoryDAO {
