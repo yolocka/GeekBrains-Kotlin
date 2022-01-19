@@ -1,9 +1,6 @@
 package com.example.moviestar.model
 
-import android.os.Build
-import android.os.Handler
-import android.os.Looper
-import com.google.gson.Gson
+
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -11,13 +8,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.io.BufferedReader
-import java.io.InputStreamReader
 import java.lang.Exception
-import java.net.HttpURLConnection
-import java.net.URL
 import java.util.concurrent.TimeUnit
-import java.util.stream.Collectors
 
 object MovieLoader {
 

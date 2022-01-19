@@ -36,6 +36,7 @@ class MainAdapter: RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
     override fun getItemCount(): Int = movie.size
 
     inner class MainViewHolder(view: View): RecyclerView.ViewHolder(view){
+
         fun bind(movie: Movie) {
             itemView.findViewById<TextView>(R.id.original_title_recycle).text = movie.title
             itemView.findViewById<TextView>(R.id.release_year_recycle).text = movie.releaseYear.toString()

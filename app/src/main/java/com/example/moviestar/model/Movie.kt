@@ -11,7 +11,11 @@ data class Movie(
     val voteAverage: Double = 0.0,
     val tagline: String = "",
     val overview: String = "",
-    val movieImage: String = ""): Parcelable
+    val movieImage: String = "",
+    val adult: Boolean = false,
+    val runtime: Int = 0,
+    var note: String = "",
+    val isFavourite: Boolean = false): Parcelable
 
 fun getWorldMovies(): List<Movie> {
     return listOf(
