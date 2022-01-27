@@ -19,7 +19,6 @@ class MainAdapter: RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
         val mainDiffUtilCallback = MainDiffUtilCallback(movie, data)
         val productDiffResult = DiffUtil.calculateDiff(mainDiffUtilCallback)
         movie = data
-        //notifyDataSetChanged()
         productDiffResult.dispatchUpdatesTo(this);
     }
 
@@ -39,7 +38,7 @@ class MainAdapter: RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
         fun bind(movie: Movie) {
             itemView.findViewById<TextView>(R.id.original_title_recycle).text = movie.title
-            itemView.findViewById<TextView>(R.id.release_year_recycle).text = movie.releaseYear.toString()
+            itemView.findViewById<TextView>(R.id.release_year_recycle).text = movie.releaseYear
             itemView.findViewById<TextView>(R.id.vote_average_recycle).text = movie.voteAverage.toString()
             itemView.setOnClickListener{
                 listener?.onClick(movie)
