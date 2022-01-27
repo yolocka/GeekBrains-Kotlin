@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviestar.R
 import com.example.moviestar.model.ContactDTO
-import com.example.moviestar.model.Movie
 
 class ContactsAdapter : RecyclerView.Adapter<ContactsAdapter.ContactsViewHolder>() {
 
