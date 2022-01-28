@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -16,12 +17,29 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "API_KEY", API_KEY)
     }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "TYPE", '"RELEASE"'
+        }
+        debug {
+            versionNameSuffix '-debug'
+            buildConfigField "String", "TYPE", '"DEBUG"'
+        }
+    }
+    flavorDimensions 'version'
+    productFlavors {
+        free {
+            dimension 'version'
+            applicationId "com.example.moviestar.free"
+        }
+        paid {
+            dimension 'version'
+            applicationId "com.example.moviestar.paid"
         }
     }
     compileOptions {
@@ -42,7 +60,8 @@ dependencies {
 
     implementation 'androidx.room:room-runtime:2.4.1'
     implementation 'androidx.room:room-ktx:2.4.1'
-    implementation 'com.google.android.gms:play-services-maps:18.0.1'
+    implementation 'com.google.android.gms:play-services-maps:18.0.2'
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.0.0'
     kapt 'androidx.room:room-compiler:2.4.1'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'

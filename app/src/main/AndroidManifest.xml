@@ -45,6 +45,13 @@
             android:name=".model.MainIntentService"
             android:exported="false" />
 
+        <service android:name=".model.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
         <receiver
             android:name=".model.MainReceiver"
             android:enabled="true"

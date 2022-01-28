@@ -1,9 +1,10 @@
 package com.example.moviestar.view
 
 import android.Manifest
-import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.SharedPreferences
 import android.net.ConnectivityManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +15,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.moviestar.R
 import com.example.moviestar.databinding.ActivityMainBinding
 import com.example.moviestar.model.MainReceiver
@@ -22,6 +24,12 @@ class MainActivity : AppCompatActivity() {
     private val receiver = MainReceiver()
     private val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
+    }
+    private val sharedPref: SharedPreferences by lazy {
+        getPreferences(Context.MODE_PRIVATE)
+    }
+    private val editor: SharedPreferences.Editor by lazy {
+        sharedPref.edit()
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -72,6 +80,7 @@ class MainActivity : AppCompatActivity() {
 
         registerReceiver(receiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
 
+
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -81,6 +90,25 @@ class MainActivity : AppCompatActivity() {
             return true
         } else if (item.itemId == R.id.menu_google_maps) {
             requestPermission()
+        } else if (item.itemId == R.id.favourite_movies) {
+            supportFragmentManager?.apply {
+                beginTransaction()
+                    .replace(R.id.main_container, FavouriteMovieFragment.newInstance())
+                    .addToBackStack("fav")
+                    .commit()
+            }
+        } else if (item.itemId == R.id.adult_item) {
+            var isAdult: Boolean = sharedPref.getBoolean(PREF_NAME, false)
+            isAdult = !isAdult
+            editor.let {
+                editor.putBoolean(PREF_NAME, isAdult)
+                editor.apply()
+            }
+            if(isAdult) {
+                item.icon = ContextCompat.getDrawable(this, R.drawable.adults_only_icon)
+            } else {
+                item.icon = ContextCompat.getDrawable(this, R.drawable.not_adults_only_icon)
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -93,5 +121,9 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         unregisterReceiver(receiver)
         super.onDestroy()
+    }
+
+    companion object {
+        private const val PREF_NAME = "is_adult"
     }
 }

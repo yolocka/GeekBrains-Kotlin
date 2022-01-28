@@ -1,6 +1,7 @@
 package com.example.moviestar.model
 
 
+import com.example.moviestar.BuildConfig
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -25,10 +26,8 @@ object MovieLoader {
         .build()
         .create(MovieAPI::class.java)
 
-    private const val MY_APY_KEY = "1c945bad114a0830195ca7fbd2922850"
-
     fun loadRetrofit(movie: Movie, listener: OnMovieLoadedListener) {
-        movieAPI.getMovie(movie.id, MY_APY_KEY)
+        movieAPI.getMovie(movie.id, BuildConfig.API_KEY)
             .enqueue(object: Callback<MovieDTO> {
                 override fun onResponse(call: Call<MovieDTO>, response: Response<MovieDTO>) {
                     if (response.isSuccessful) {

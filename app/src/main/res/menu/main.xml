@@ -7,8 +7,18 @@
         app:showAsAction="never"
         />
     <item
+        android:id="@+id/favourite_movies"
+        android:title="@string/favourites_movie"
+        app:showAsAction="never"
+        />
+    <item
         android:id="@+id/menu_google_maps"
         android:icon="@android:drawable/ic_dialog_map"
         android:title="@string/maps"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/adult_item"
+        android:icon="@drawable/adults_only_icon"
+        android:title="@string/adult"
         app:showAsAction="always" />
 </menu>
