@@ -61,28 +61,6 @@
 
     </LinearLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/adultFAB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
-        app:borderWidth="0dp"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="15dp"
-        android:src="@drawable/adults_only_icon"
-        app:maxImageSize="50dp"/>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/favourite_movies_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/favourites_movie"
-        android:backgroundTint="@color/cardview_shadow_end_color"
-        android:layout_margin="15dp"
-        android:textSize="@dimen/textSize"
-        android:layout_gravity="bottom|start"
-        />
-
     <LinearLayout
         android:id="@+id/loadingContainer"
         android:layout_width="match_parent"

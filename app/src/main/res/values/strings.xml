@@ -18,6 +18,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="contacts">Контакты</string>
     <string name="maps">Моя геолокация</string>
+    <string name="adult">Только для взрослых</string>
     <string name="contacts_not_available">Контакты не доступны</string>
     <string name="ask_contacts_permission">Дать доступ к контактам?</string>
     <string name="again_ask_contacts_permission">Без разрешения контакты будут не доступны</string>

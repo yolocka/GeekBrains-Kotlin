@@ -8,9 +8,6 @@ import com.example.moviestar.model.LocalRepositoryImpl
 import com.example.moviestar.model.Movie
 import com.example.moviestar.model.RepositoryImpl
 import com.example.moviestar.view.App
-import com.example.moviestar.view.MainAdapter
-import java.lang.Exception
-import kotlin.random.Random
 
 class MainViewModel : ViewModel() {
 
@@ -32,17 +29,12 @@ class MainViewModel : ViewModel() {
 
         Thread {
             Thread.sleep(1000)
-
-            if(Random.nextBoolean() || Random.nextBoolean()){
-                val movie = if (isRussian) {
-                    RepositoryImpl.getMovieFromLocalStorageRus()
-                } else {
-                    RepositoryImpl.getMovieFromLocalStorageWorld()
-                }
-                liveDataToObserve.postValue(AppState.Success(movie, isRussian))
+            val movie = if (isRussian) {
+                RepositoryImpl.getMovieFromLocalStorageRus()
             } else {
-                liveDataToObserve.postValue(AppState.Error(Exception("Нет подключения к интернету")))
+                RepositoryImpl.getMovieFromLocalStorageWorld()
             }
+            liveDataToObserve.postValue(AppState.Success(movie, isRussian))
         }.start()
     }
 }
