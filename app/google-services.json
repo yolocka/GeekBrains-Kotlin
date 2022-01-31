@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "249958874736",
+    "project_id": "movie-star-b3286",
+    "storage_bucket": "movie-star-b3286.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:249958874736:android:2d30d8a50be91892c97eb5",
+        "android_client_info": {
+          "package_name": "com.example.moviestar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "249958874736-89gmrno3868un9pnqnva7mqgqm9vovcl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHrvjGM0pgTo9SXFQO5LqkwoxmCXRswuA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "249958874736-89gmrno3868un9pnqnva7mqgqm9vovcl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
